@@ -1,2 +1,2 @@
-web: gunicorn covalenthub.wsgi
+web: gunicorn CCMS.wsgi --covalenthub -
 
