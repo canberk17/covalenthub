@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Q
 from django.http import HttpResponse
 
-from blog.models import BlogPost
+from blog.models import BlogPost,Comment
 from blog.forms import CreateBlogPostForm, UpdateBlogPostForm
 from account.models import Account
 
@@ -88,36 +88,3 @@ def get_blog_queryset(query=None):
 
 	return list(set(queryset))
 
-from .models import BlogPost, Comment
-from .forms import  CommentForm
-
-def post_detail(request, year, month, day, post):
-    post = get_object_or_404(BlogPost, slug=post,
-                                   status='published',
-                                   publish__year=year,
-                                   publish__month=month,
-                                   publish__day=day)
-
-    # List of active comments for this post
-    comments = post.comments.filter(active=True)
-
-    new_comment = None
-
-    if request.method == 'POST':
-        # A comment was posted
-        comment_form = CommentForm(data=request.POST)
-        if comment_form.is_valid():
-            # Create Comment object but don't save to database yet          
-            new_comment = comment_form.save(commit=False)
-            # Assign the current post to the comment
-            new_comment.post = post
-            # Save the comment to the database
-            new_comment.save()
-    else:
-        comment_form = CommentForm()                   
-    return render(request,
-                  'blog/detail_blog.html',
-                  {'post': post,
-                   'comments': comments,
-                   'new_comment': new_comment,
-                   'comment_form': comment_form})

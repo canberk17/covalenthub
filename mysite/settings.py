@@ -13,7 +13,7 @@ SECRET_KEY = '!p1ai_b373g3bmz-**m@%h9+0_8xm7*41etdbi+t266-mogm08'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['cqthub.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','cqthub.herokuapp.com']
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend' 
@@ -31,6 +31,8 @@ INSTALLED_APPS = [
     'account',
     'blog',
 
+    #installed apps
+ 'crispy_forms',
 
     # django apps
     'django.contrib.admin',
@@ -74,7 +76,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
