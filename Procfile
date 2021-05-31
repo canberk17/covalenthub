@@ -1,1 +1,1 @@
-web: gunicorn CCMS.wsgi --cqthub -
+web: gunicorn cqthub.wsgi
