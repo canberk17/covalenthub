@@ -1,1 +1,1 @@
-web: gunicorn cqthub.wsgi --log-file - --log-level debug
+web: gunicorn mysite.wsgi --log-file - --log-level debug
